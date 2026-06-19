@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Librería Logos</title>
+    <style>
+        body { background-color: #121212; color: #ffffff; font-family: sans-serif; text-align: center; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
+        .card { background: #1e1e1e; padding: 10px; border-radius: 10px; }
+        img { width: 100%; border-radius: 5px; }
+        button { background: #007bff; color: white; border: none; padding: 10px 20px; margin: 5px; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Librería Logos</h1>
+    <div id="pantalla">
+        <h2>¿Qué buscas hoy?</h2>
+        <button onclick="filtrar('Biblia')">Ver Biblias</button>
+        <button onclick="filtrar('Otros')">Otros Productos</button>
+    </div>
+    <div id="contenedor-productos" class="grid"></div>
+
+    <script>
+        const productos = [
+            { id: "9780789924155", nombre: "Biblia RV 1960", categoria: "Biblia", version: "RV1960" },
+            // Agrega aquí todos tus productos siguiendo este formato
+        ];
+
+        function filtrar(categoria) {
+            const contenedor = document.getElementById('contenedor-productos');
+            contenedor.innerHTML = '';
+            const filtrados = productos.filter(p => p.categoria === categoria);
+            
+            filtrados.forEach(p => {
+                contenedor.innerHTML += `
+                    <div class="card">
+                        <img src="0-imagenes/${p.id}.jpg" alt="${p.nombre}">
+                        <p>${p.nombre}</p>
+                        <button onclick="whatsapp('${p.nombre}')">Comprar</button>
+                    </div>
+                `;
+            });
+        }
+
+        function whatsapp(nombre) {
+            window.open(`https://wa.me/573125756581?text=Hola, quiero comprar la ${nombre}`);
+        }
+    </script>
+</body>
+</html>
