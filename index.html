@@ -107,28 +107,40 @@
 <div class='card' data-categoria='BIBLIAS' data-version='REINA VALERA 1960' data-presentacion='DAMA' data-letra='MEDIANA' data-tema='DE ESTUDIO' data-precio='82000'><img src='0-imagenes/9786287894488.jpg'><p>BIBLIA PASTEL RVR1960 - $82000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA PASTEL RVR1960')">Pedir</button></div>
     </div>
 
-    <script>
-        function filtrarTodo() {
-            const filtros = {
-                categoria: document.getElementById('f-cat').value,
-                version: document.getElementById('f-ver').value,
-                presentacion: document.getElementById('f-pre').value,
-                letra: document.getElementById('f-let').value,
-                tema: document.getElementById('f-tem').value,
-                precio: document.getElementById('f-precio').value
-            };
-            document.querySelectorAll('.card').forEach(card => {
-                const p = parseInt(card.getAttribute('data-precio'));
-                const [min, max] = filtros.precio === 'Todas' ? [0, 9999999] : filtros.precio.split('-').map(Number);
-                const match = (filtros.categoria === 'Todas' || card.getAttribute('data-categoria') === filtros.categoria) &&
-                              (filtros.version === 'Todas' || card.getAttribute('data-version') === filtros.version) &&
-                              (filtros.presentacion === 'Todas' || card.getAttribute('data-presentacion') === filtros.presentacion) &&
-                              (filtros.letra === 'Todas' || card.getAttribute('data-letra') === filtros.letra) &&
-                              (filtros.tema === 'Todas' || card.getAttribute('data-tema') === filtros.tema) &&
-                              (p >= min && p <= max);
-                card.style.display = match ? 'flex' : 'none';
-            });
-        }
-    </script>
-</body>
-</html>
+<script>
+    function filtrarTodo() {
+        const filtros = {
+            categoria: document.getElementById('f-cat').value,
+            version: document.getElementById('f-ver').value,
+            presentacion: document.getElementById('f-pre').value,
+            letra: document.getElementById('f-let').value,
+            tema: document.getElementById('f-tem').value,
+            precio: document.getElementById('f-precio').value
+        };
+
+        const catalogo = document.getElementById('catalogo');
+        const cards = Array.from(catalogo.querySelectorAll('.card'));
+
+        // 1. Primero, filtramos y mostramos/ocultamos
+        cards.forEach(card => {
+            const p = parseInt(card.getAttribute('data-precio'));
+            const [min, max] = filtros.precio === 'Todas' ? [0, 9999999] : filtros.precio.split('-').map(Number);
+            
+            const match = (filtros.categoria === 'Todas' || card.getAttribute('data-categoria') === filtros.categoria) &&
+                          (filtros.version === 'Todas' || card.getAttribute('data-version') === filtros.version) &&
+                          (filtros.presentacion === 'Todas' || card.getAttribute('data-presentacion') === filtros.presentacion) &&
+                          (filtros.letra === 'Todas' || card.getAttribute('data-letra') === filtros.letra) &&
+                          (filtros.tema === 'Todas' || card.getAttribute('data-tema') === filtros.tema) &&
+                          (p >= min && p <= max);
+
+            card.style.display = match ? 'flex' : 'none';
+        });
+
+        // 2. Ordenamos los elementos visibles de forma ascendente según su precio
+        const visibles = cards.filter(card => card.style.display === 'flex');
+        visibles.sort((a, b) => parseInt(a.getAttribute('data-precio')) - parseInt(b.getAttribute('data-precio')));
+
+        // 3. Volvemos a insertar en el orden correcto
+        visibles.forEach(card => catalogo.appendChild(card));
+    }
+</script>
