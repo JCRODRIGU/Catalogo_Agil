@@ -3,49 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Librería Logos</title>
+    <title>Catalogo Logos</title>
     <style>
-        body { background-color: #121212; color: #ffffff; font-family: sans-serif; text-align: center; padding: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; }
-        .card { background: #1e1e1e; padding: 10px; border-radius: 10px; }
-        img { width: 100%; border-radius: 5px; }
-        button { background: #007bff; color: white; border: none; padding: 10px 20px; margin: 5px; border-radius: 5px; cursor: pointer; }
+        :root { --bg: #121212; --card: #1e1e1e; --accent: #007bff; --text: #ffffff; }
+        body { background-color: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; padding: 20px; text-align: center; }
+        .filtros { margin-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .btn-filtro { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; }
+        .btn-filtro.activo { background: var(--accent); transform: scale(1.05); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-top: 20px; }
+        .card { background: var(--card); padding: 10px; border-radius: 10px; display: flex; flex-direction: column; }
+        .card img { width: 100%; border-radius: 5px; margin-bottom: 10px; }
+        .btn-comprar { margin-top: auto; background: #25d366; color: white; border: none; padding: 8px; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
-    <h1>Librería Logos</h1>
-    <div id="pantalla">
-        <h2>¿Qué buscas hoy?</h2>
-        <button onclick="filtrar('Biblia')">Ver Biblias</button>
-        <button onclick="filtrar('Otros')">Otros Productos</button>
+
+    <h1>Librería Logos (Actualizado)</h1>
+    
+    <div id="filtros-container">
+        <h3>1. Versión:</h3>
+        <div class="filtros" id="f-version">
+            <button class="btn-filtro" onclick="filtrar('version', 'RV1960', this)">RV 1960</button>
+            <button class="btn-filtro" onclick="filtrar('version', 'NTV', this)">NTV</button>
+            <button class="btn-filtro" onclick="filtrar('version', 'NVI', this)">NVI</button>
+        </div>
+        <h3>2. Presentación:</h3>
+        <div class="filtros" id="f-genero">
+            <button class="btn-filtro" onclick="filtrar('genero', 'Hombre', this)">Hombre</button>
+            <button class="btn-filtro" onclick="filtrar('genero', 'Mujer', this)">Mujer</button>
+        </div>
     </div>
+
     <div id="contenedor-productos" class="grid"></div>
 
     <script>
         const productos = [
-            { id: "9780789924155", nombre: "Biblia RV 1960", categoria: "Biblia", version: "RV1960" },
-            // Agrega aquí todos tus productos siguiendo este formato
+            { id: "9780789924155", nombre: "Biblia RV 1960", version: "RV1960", genero: "Hombre" },
+            { id: "9781414323456", nombre: "Biblia NTV Rosa", version: "NTV", genero: "Mujer" }
         ];
 
-        function filtrar(categoria) {
+        let filtrosActivos = { version: '', genero: '' };
+
+        function filtrar(tipo, valor, btn) {
+            btn.parentElement.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('activo'));
+            btn.classList.add('activo');
+            filtrosActivos[tipo] = valor;
+            mostrarProductos();
+        }
+
+        function mostrarProductos() {
             const contenedor = document.getElementById('contenedor-productos');
             contenedor.innerHTML = '';
-            const filtrados = productos.filter(p => p.categoria === categoria);
+            const filtrados = productos.filter(p => 
+                (filtrosActivos.version === '' || p.version === filtrosActivos.version) &&
+                (filtrosActivos.genero === '' || p.genero === filtrosActivos.genero)
+            );
             
             filtrados.forEach(p => {
                 contenedor.innerHTML += `
                     <div class="card">
-                        <img src="0-imagenes/${p.id}.jpg" alt="${p.nombre}">
+                        <img src="0-imagenes/${p.id}.jpg" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/150'">
                         <p>${p.nombre}</p>
-                        <button onclick="whatsapp('${p.nombre}')">Comprar</button>
+                        <button class="btn-comprar" onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la ${p.nombre}')">Pedir</button>
                     </div>
                 `;
             });
         }
-
-        function whatsapp(nombre) {
-            window.open(`https://wa.me/573125756581?text=Hola, quiero comprar la ${nombre}`);
-        }
+        
+        mostrarProductos();
     </script>
 </body>
 </html>
