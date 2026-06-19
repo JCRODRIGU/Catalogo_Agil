@@ -10,8 +10,21 @@
         .filtros { margin-bottom: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
         .btn { background: #333; color: white; border: 1px solid #444; padding: 10px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; }
         .btn.activo { background: var(--accent); border-color: var(--accent); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; margin-top: 20px; }
-        .card { background: var(--card); padding: 15px; border-radius: 12px; transition: 0.5s; overflow: hidden; }
+        .grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+    gap: 20px; 
+}
+.card { 
+    background: var(--card); 
+    padding: 15px; 
+    border-radius: 12px; 
+    display: flex; /* Esto es clave */
+    flex-direction: column; /* Alinea todo verticalmente */
+    justify-content: space-between; /* Empuja el botón al final */
+}
+.card p { flex-grow: 1; margin: 10px 0; font-size: 14px; }
+.card img { width: 100%; height: 180px; object-fit: contain; background: #000; border-radius: 8px; }
         .card.oculto { opacity: 0; transform: scale(0); width: 0; padding: 0; margin: 0; display: none; }
         .card img { width: 100%; height: 220px; object-fit: contain; background: #000; border-radius: 8px; margin-bottom: 10px; }
         .btn-comprar { margin-top: 10px; background: #25d366; color: white; border: none; padding: 10px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: bold; }
@@ -21,11 +34,29 @@
 
     <h1>Librería Logos</h1>
 
-    <div class="filtros">
-        <button class="btn activo" onclick="filtrar('categoria', 'Todas', this)">Ver Todo</button>
-        <button class="btn" onclick="filtrar('categoria', 'BIBLIAS', this)">Biblias</button>
-        <button class="btn" onclick="filtrar('categoria', 'LIBROS', this)">Libros</button>
-    </div>
+   <div class="filtros">
+    <select class="btn" onchange="filtrar('categoria', this.value)">
+        <option value="Todas">Categoría (Todas)</option>
+        <option value="BIBLIAS">Biblias</option>
+        <option value="LIBROS">Libros</option>
+    </select>
+    
+    <select class="btn" onchange="filtrar('version', this.value)">
+        <option value="Todas">Versión (Todas)</option>
+        <option value="REINA VALERA 1960">Reina Valera 1960</option>
+        <option value="NUEVA TRADUCCION VIVIENTE">NTV</option>
+        <option value="TRADUCCION EN LENGUAJE ACTUAL">Lenguaje Actual</option>
+    </select>
+    
+    <select class="btn" onchange="filtrar('letra', this.value)">
+        <option value="Todas">Letra (Todas)</option>
+        <option value="PEQUEÑA">Pequeña</option>
+        <option value="MEDIANA">Mediana</option>
+        <option value="GRANDE">Grande</option>
+        <option value="GIGANTE">Gigante</option>
+        <option value="SUPERGIGANTE">Super Gigante</option>
+    </select>
+</div>
 
     <div class="grid" id="catalogo">
         <!-- AQUÍ VAN TUS TARJETAS GENERADAS DESDE EXCEL -->
@@ -107,22 +138,17 @@
         </div>
     </div>
 
-    <script>
-        function filtrar(atributo, valor, btn) {
-            // Activar botón
-            btn.parentElement.querySelectorAll('.btn').forEach(b => b.classList.remove('activo'));
-            btn.classList.add('activo');
-            
-            // Filtrar
-            document.querySelectorAll('.card').forEach(card => {
-                const valorCard = card.getAttribute('data-' + atributo);
-                if(valor === 'Todas' || valorCard === valor) {
-                    card.classList.remove('oculto');
-                } else {
-                    card.classList.add('oculto');
-                }
-            });
-        }
-    </script>
+  <script>
+    function filtrar(atributo, valor) {
+        document.querySelectorAll('.card').forEach(card => {
+            // Si el valor es 'Todas', mostramos, si no, comparamos
+            if(valor === 'Todas' || card.getAttribute('data-' + atributo) === valor) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
 </body>
 </html>
