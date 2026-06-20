@@ -8,22 +8,15 @@
         :root { --bg: #121212; --card: #1e1e1e; --accent: #007bff; --text: #ffffff; }
         body { background-color: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; padding: 20px; text-align: center; }
         
-        /* Estilos optimizados para filtros responsivos */
-        .filtros { 
-            margin-bottom: 30px; 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 10px; 
-            padding: 0 10px;
-        }
-        @media (min-width: 768px) {
-            .filtros { grid-template-columns: repeat(7, auto); justify-content: center; }
-        }
-        .filtros select, .filtros button { 
-            width: 100%; height: 40px; background: #333; color: white; border: 1px solid #444; 
-            border-radius: 8px; cursor: pointer; font-size: 13px; box-sizing: border-box;
-        }
+        /* Estilos de filtros */
+        .filtros { margin-bottom: 30px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 10px; }
+        @media (min-width: 768px) { .filtros { grid-template-columns: repeat(7, auto); justify-content: center; } }
+        .filtros select, .filtros button { width: 100%; height: 40px; background: #333; color: white; border: 1px solid #444; border-radius: 8px; cursor: pointer; font-size: 13px; box-sizing: border-box; }
         .btn-limpiar { background: #17a2b8 !important; color: white !important; font-weight: bold; }
+
+        /* Botón WhatsApp */
+        .btn-whatsapp { background-color: #25d366; color: white; border: none; padding: 12px 25px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 15px; transition: background 0.3s; }
+        .btn-whatsapp:hover { background-color: #128c7e; }
 
         /* Grid y tarjetas */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
@@ -35,20 +28,24 @@
 </head>
 <body>
 
-    <h1>Librería Logos</h1>
+<header style="margin-bottom: 30px; padding: 20px;">
+    <h1 style="margin: 0; font-size: 24px;">Librería Cristiana Logos</h1>
+    <p style="margin: 5px 0; color: #aaa; font-size: 14px;">Calle 35 C Sur No 78A-18 Kennedy Central, Bogotá</p>
+    <button class="btn-whatsapp" onclick="window.open('https://wa.me/573125756581')">💬 Hablar por WhatsApp</button>
+</header>
 
-    <div class="filtros">
-        <select onchange="filtrarTodo()" id="f-cat"><option value="Todas">Categoría</option><option value="BIBLIAS">Biblias</option><option value="LIBROS">Libros</option></select>
-        <select onchange="filtrarTodo()" id="f-ver"><option value="Todas">Versión</option><option value="REINA VALERA 1960">RV1960</option><option value="NUEVA TRADUCCION VIVIENTE">NTV</option><option value="NUEVA VERSION INTERNACIONAL">NVI</option><option value="TRADUCCION EN LENGUAJE ACTUAL">TLA</option></select>
-        <select onchange="filtrarTodo()" id="f-pre"><option value="Todas">Present.</option><option value="DAMA">Dama</option><option value="CABALLERO">Caballero</option></select>
-        <select onchange="filtrarTodo()" id="f-let"><option value="Todas">Letra</option><option value="PEQUEÑA">Pequeña</option><option value="MEDIANA">Mediana</option><option value="GRANDE">Grande</option><option value="GIGANTE">Gigante</option><option value="SUPERGIGANTE">Super Gig.</option></select>
-        <select onchange="filtrarTodo()" id="f-tem"><option value="Todas">Tema</option><option value="GENERAL">General</option><option value="DE ESTUDIO">Estudio</option><option value="DE GUERRA ESPIRITUAL">Guerra Esp.</option><option value="DE MINISTRO">Ministro</option></select>
-        <select onchange="filtrarTodo()" id="f-precio"><option value="Todas">Precio</option><option value="30000-50000">30k-50k</option><option value="50000-80000">50k-80k</option><option value="80000-110000">80k-110k</option><option value="110000-130000">110k-130k</option><option value="130000-150000">130k-150k</option><option value="150000-180000">150k-180k</option><option value="180000-220000">180k-220k</option><option value="220001-9999999">+220k</option></select>
-        <button class="btn-limpiar" onclick="limpiarFiltros()">Limpiar</button>
-    </div>
+<div class="filtros">
+    <select onchange="filtrarTodo()" id="f-cat"><option value="Todas">Categoría</option><option value="BIBLIAS">Biblias</option><option value="LIBROS">Libros</option></select>
+    <select onchange="filtrarTodo()" id="f-ver"><option value="Todas">Versión</option><option value="REINA VALERA 1960">RV1960</option><option value="NUEVA TRADUCCION VIVIENTE">NTV</option><option value="NUEVA VERSION INTERNACIONAL">NVI</option><option value="TRADUCCION EN LENGUAJE ACTUAL">TLA</option></select>
+    <select onchange="filtrarTodo()" id="f-pre"><option value="Todas">Present.</option><option value="DAMA">Dama</option><option value="CABALLERO">Caballero</option></select>
+    <select onchange="filtrarTodo()" id="f-let"><option value="Todas">Letra</option><option value="PEQUEÑA">Pequeña</option><option value="MEDIANA">Mediana</option><option value="GRANDE">Grande</option><option value="GIGANTE">Gigante</option><option value="SUPERGIGANTE">Super Gig.</option></select>
+    <select onchange="filtrarTodo()" id="f-tem"><option value="Todas">Tema</option><option value="GENERAL">General</option><option value="DE ESTUDIO">Estudio</option><option value="DE GUERRA ESPIRITUAL">Guerra Esp.</option><option value="DE MINISTRO">Ministro</option></select>
+    <select onchange="filtrarTodo()" id="f-precio"><option value="Todas">Precio</option><option value="30000-50000">30k-50k</option><option value="50000-80000">50k-80k</option><option value="80000-110000">80k-110k</option><option value="110000-130000">110k-130k</option><option value="130000-150000">130k-150k</option><option value="150000-180000">150k-180k</option><option value="180000-220000">180k-220k</option><option value="220001-9999999">+220k</option></select>
+    <button class="btn-limpiar" onclick="limpiarFiltros()">Limpiar</button>
+</div>
 
-    <div class="grid" id="catalogo">
-        <div class='card' data-categoria='BIBLIAS' data-version='NUEVA TRADUCCION VIVIENTE' data-presentacion='CABALLERO' data-letra='PEQUEÑA' data-tema='GENERAL' data-precio='110000'><img src='0-imagenes/9781496427434.jpg'><p>BIBLIA NTV NEGRO SENTI PIEL - $110000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA NTV NEGRO SENTI PIEL')">Pedir</button></div>
+<div class="grid" id="catalogo">
+    <div class='card' data-categoria='BIBLIAS' data-version='NUEVA TRADUCCION VIVIENTE' data-presentacion='CABALLERO' data-letra='PEQUEÑA' data-tema='GENERAL' data-precio='110000'><img src='0-imagenes/9781496427434.jpg'><p>BIBLIA NTV NEGRO SENTI PIEL - $110000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA NTV NEGRO SENTI PIEL')">Pedir</button></div>
 <div class='card' data-categoria='BIBLIAS' data-version='NUEVA TRADUCCION VIVIENTE' data-presentacion='CABALLERO' data-letra='MEDIANA' data-tema='DE ESTUDIO' data-precio='160000'><img src='0-imagenes/9781496489692.jpg'><p>BIBLIA NTV MANUAL BLANCA - $160000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA NTV MANUAL BLANCA')">Pedir</button></div>
 <div class='card' data-categoria='BIBLIAS' data-version='REINA VALERA 1960' data-presentacion='CABALLERO' data-letra='GRANDE' data-tema='DE GUERRA ESPIRITUAL' data-precio='160000'><img src='0-imagenes/9798885166133.jpg'><p>BIBLIA REINA VALERA 1960 LEON - $160000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA REINA VALERA 1960 LEON')">Pedir</button></div>
 <div class='card' data-categoria='BIBLIAS' data-version='NUEVA TRADUCCION VIVIENTE' data-presentacion='CABALLERO' data-letra='GIGANTE' data-tema='DE MINISTRO' data-precio='160000'><img src='0-imagenes/9781496489678.jpg'><p>BIBLIA NTV MANUAL NEGRA SIN CIERRE - $160000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA NTV MANUAL NEGRA SIN CIERRE')">Pedir</button></div>
@@ -122,41 +119,25 @@
 <div class='card' data-categoria='BIBLIAS' data-version='NUEVA VERSION INTERNACIONAL' data-presentacion='DAMA' data-letra='MEDIANA' data-tema='DE MINISTRO' data-precio='200000'><img src='0-imagenes/9781956959086.jpg'><p>BIBLIA NVI GRIS - LETRA GRANDE  - $200000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA NVI GRIS - LETRA GRANDE ')">Pedir</button></div>
 <div class='card' data-categoria='BIBLIAS' data-version='REINA VALERA 1960' data-presentacion='DAMA' data-letra='MEDIANA' data-tema='GENERAL' data-precio='70000'><img src='0-imagenes/9780829773767.jpg'><p>BIBLIA RV1960 PREMIOS Y REGALOS  - $70000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA RV1960 PREMIOS Y REGALOS ')">Pedir</button></div>
 <div class='card' data-categoria='BIBLIAS' data-version='REINA VALERA 1960' data-presentacion='DAMA' data-letra='MEDIANA' data-tema='DE ESTUDIO' data-precio='82000'><img src='0-imagenes/9786287894488.jpg'><p>BIBLIA PASTEL RVR1960 - $82000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA PASTEL RVR1960')">Pedir</button></div>
-        </div>
+</div>
 
-    <script>
-        function filtrarTodo() {
-            const filtros = {
-                categoria: document.getElementById('f-cat').value,
-                version: document.getElementById('f-ver').value,
-                presentacion: document.getElementById('f-pre').value,
-                letra: document.getElementById('f-let').value,
-                tema: document.getElementById('f-tem').value,
-                precio: document.getElementById('f-precio').value
-            };
-            const catalogo = document.getElementById('catalogo');
-            const cards = Array.from(catalogo.querySelectorAll('.card'));
-            cards.forEach(card => {
-                const p = parseInt(card.getAttribute('data-precio'));
-                const [min, max] = filtros.precio === 'Todas' ? [0, 9999999] : filtros.precio.split('-').map(Number);
-                const match = (filtros.categoria === 'Todas' || card.getAttribute('data-categoria') === filtros.categoria) &&
-                              (filtros.version === 'Todas' || card.getAttribute('data-version') === filtros.version) &&
-                              (filtros.presentacion === 'Todas' || card.getAttribute('data-presentacion') === filtros.presentacion) &&
-                              (filtros.letra === 'Todas' || card.getAttribute('data-letra') === filtros.letra) &&
-                              (filtros.tema === 'Todas' || card.getAttribute('data-tema') === filtros.tema) &&
-                              (p >= min && p <= max);
-                card.style.display = match ? 'flex' : 'none';
-            });
-            const visibles = cards.filter(card => card.style.display === 'flex');
-            visibles.sort((a, b) => parseInt(a.getAttribute('data-precio')) - parseInt(b.getAttribute('data-precio')));
-            visibles.forEach(card => catalogo.appendChild(card));
-        }
-
-        function limpiarFiltros() {
-            document.querySelectorAll('.filtros select').forEach(s => s.value = 'Todas');
-            filtrarTodo();
-        }
-        window.onload = filtrarTodo;
-    </script>
+<script>
+    function filtrarTodo() {
+        const filtros = { categoria: document.getElementById('f-cat').value, version: document.getElementById('f-ver').value, presentacion: document.getElementById('f-pre').value, letra: document.getElementById('f-let').value, tema: document.getElementById('f-tem').value, precio: document.getElementById('f-precio').value };
+        const catalogo = document.getElementById('catalogo');
+        const cards = Array.from(catalogo.querySelectorAll('.card'));
+        cards.forEach(card => {
+            const p = parseInt(card.getAttribute('data-precio'));
+            const [min, max] = filtros.precio === 'Todas' ? [0, 9999999] : filtros.precio.split('-').map(Number);
+            const match = (filtros.categoria === 'Todas' || card.getAttribute('data-categoria') === filtros.categoria) && (filtros.version === 'Todas' || card.getAttribute('data-version') === filtros.version) && (filtros.presentacion === 'Todas' || card.getAttribute('data-presentacion') === filtros.presentacion) && (filtros.letra === 'Todas' || card.getAttribute('data-letra') === filtros.letra) && (filtros.tema === 'Todas' || card.getAttribute('data-tema') === filtros.tema) && (p >= min && p <= max);
+            card.style.display = match ? 'flex' : 'none';
+        });
+        const visibles = cards.filter(card => card.style.display === 'flex');
+        visibles.sort((a, b) => parseInt(a.getAttribute('data-precio')) - parseInt(b.getAttribute('data-precio')));
+        visibles.forEach(card => catalogo.appendChild(card));
+    }
+    function limpiarFiltros() { document.querySelectorAll('.filtros select').forEach(s => s.value = 'Todas'); filtrarTodo(); }
+    window.onload = filtrarTodo;
+</script>
 </body>
 </html>
