@@ -3,46 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Librería Logos</title>
+    <title>Catálogo Librería Cristiana Logos</title>
     <style>
         :root { --bg: #121212; --card: #1e1e1e; --text: #ffffff; }
         body { background-color: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; padding: 20px; text-align: center; }
         
-        /* Contenedor del encabezado */
         header { margin-bottom: 30px; }
-        
-        /* Botón de WhatsApp */
-        .btn-whatsapp { 
-            background-color: #25d366; 
-            color: white; 
-            border: none; 
-            padding: 12px 25px; 
-            border-radius: 25px; 
-            font-size: 16px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            margin-bottom: 20px; 
-        }
+        .btn-whatsapp { background-color: #25d366; color: white; border: none; padding: 12px 25px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; margin-bottom: 20px; }
 
-        /* Alineación y estilo de filtros */
+        /* Filtros */
         .filtros { margin-bottom: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 0 10px; }
-        .filtros select, .filtros button { 
-            padding: 10px 15px; 
-            background: #2c2c2c; 
-            color: white; 
-            border: 1px solid #444; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            font-size: 14px; 
-        }
-        
-        /* Botón azul de limpiar */
-        .btn-limpiar { background-color: #007bff !important; border-color: #0056b3 !important; }
+        .filtros select, .filtros button { padding: 10px 15px; background: #2c2c2c; color: white; border: 1px solid #444; border-radius: 5px; cursor: pointer; font-size: 14px; }
+        .btn-limpiar { background-color: #007bff !important; color: white !important; }
 
-        /* Grid y tarjetas */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
-        .card { background: var(--card); padding: 15px; border-radius: 12px; }
+        /* Grid y tarjetas alineadas */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .card { 
+            background: var(--card); padding: 15px; border-radius: 12px; 
+            display: flex; flex-direction: column; justify-content: space-between; 
+        }
+        .card p { flex-grow: 1; margin: 10px 0; font-size: 14px; }
         .card img { width: 100%; height: 220px; object-fit: contain; background: #000; border-radius: 8px; margin-bottom: 10px; }
+        .btn-comprar { margin-top: 10px; background: #25d366; color: white; border: none; padding: 10px; width: 100%; border-radius: 6px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -138,7 +120,8 @@
 <div class='card' data-categoria='BIBLIAS' data-version='NUEVA VERSION INTERNACIONAL' data-presentacion='DAMA' data-letra='MEDIANA' data-tema='DE MINISTRO' data-precio='200000'><img src='0-imagenes/9781956959086.jpg'><p>BIBLIA NVI GRIS - LETRA GRANDE  - $200000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA NVI GRIS - LETRA GRANDE ')">Pedir</button></div>
 <div class='card' data-categoria='BIBLIAS' data-version='REINA VALERA 1960' data-presentacion='DAMA' data-letra='MEDIANA' data-tema='GENERAL' data-precio='70000'><img src='0-imagenes/9780829773767.jpg'><p>BIBLIA RV1960 PREMIOS Y REGALOS  - $70000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA RV1960 PREMIOS Y REGALOS ')">Pedir</button></div>
 <div class='card' data-categoria='BIBLIAS' data-version='REINA VALERA 1960' data-presentacion='DAMA' data-letra='MEDIANA' data-tema='DE ESTUDIO' data-precio='82000'><img src='0-imagenes/9786287894488.jpg'><p>BIBLIA PASTEL RVR1960 - $82000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA PASTEL RVR1960')">Pedir</button></div>
-</div>
+    </div>
+    </div>
 
 <script>
     function filtrarTodo() {
@@ -148,7 +131,7 @@
             const p = parseInt(card.getAttribute('data-precio'));
             const [min, max] = filtros.precio === 'Todas' ? [0, 9999999] : filtros.precio.split('-').map(Number);
             const match = (filtros.categoria === 'Todas' || card.getAttribute('data-categoria') === filtros.categoria) && (filtros.version === 'Todas' || card.getAttribute('data-version') === filtros.version) && (filtros.presentacion === 'Todas' || card.getAttribute('data-presentacion') === filtros.presentacion) && (filtros.letra === 'Todas' || card.getAttribute('data-letra') === filtros.letra) && (filtros.tema === 'Todas' || card.getAttribute('data-tema') === filtros.tema) && (p >= min && p <= max);
-            card.style.display = match ? 'block' : 'none';
+            card.style.display = match ? 'flex' : 'none';
         });
     }
     function limpiarFiltros() { document.querySelectorAll('.filtros select').forEach(s => s.value = 'Todas'); filtrarTodo(); }
