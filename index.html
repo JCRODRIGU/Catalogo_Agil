@@ -8,7 +8,23 @@
         :root { --bg: #121212; --card: #1e1e1e; --text: #ffffff; }
         body { background-color: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; padding: 20px; text-align: center; }
         
-        /* Estilo original de botones de filtro */
+        /* Contenedor del encabezado */
+        header { margin-bottom: 30px; }
+        
+        /* Botón de WhatsApp */
+        .btn-whatsapp { 
+            background-color: #25d366; 
+            color: white; 
+            border: none; 
+            padding: 12px 25px; 
+            border-radius: 25px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-bottom: 20px; 
+        }
+
+        /* Alineación y estilo de filtros */
         .filtros { margin-bottom: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 0 10px; }
         .filtros select, .filtros button { 
             padding: 10px 15px; 
@@ -19,10 +35,9 @@
             cursor: pointer; 
             font-size: 14px; 
         }
-        .btn-limpiar { background: #d9534f !important; border: none !important; }
-
-        /* Botón WhatsApp */
-        .btn-whatsapp { background-color: #25d366; color: white; border: none; padding: 12px 25px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; margin-bottom: 30px; }
+        
+        /* Botón azul de limpiar */
+        .btn-limpiar { background-color: #007bff !important; border-color: #0056b3 !important; }
 
         /* Grid y tarjetas */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
@@ -35,7 +50,7 @@
 <header>
     <h1>Librería Cristiana Logos</h1>
     <p style="color: #aaa;">Calle 35 C Sur No 78A-18 Kennedy Central, Bogotá</p>
-    <button class="btn-whatsapp" onclick="window.open('https://wa.me/573125756581')">💬 Contactar por WhatsApp</button>
+    <button class="btn-whatsapp" onclick="window.open('https://wa.me/573125756581')">💬 Hablar por WhatsApp</button>
 </header>
 
 <div class="filtros">
@@ -45,7 +60,7 @@
     <select onchange="filtrarTodo()" id="f-let"><option value="Todas">Letra</option><option value="MEDIANA">Mediana</option><option value="GRANDE">Grande</option></select>
     <select onchange="filtrarTodo()" id="f-tem"><option value="Todas">Tema</option><option value="GENERAL">General</option><option value="DE ESTUDIO">Estudio</option></select>
     <select onchange="filtrarTodo()" id="f-precio"><option value="Todas">Precio</option><option value="0-50000">Hasta 50k</option><option value="50001-9999999">Más de 50k</option></select>
-    <button class="btn-limpiar" onclick="limpiarFiltros()">Limpiar</button>
+    <button class="btn-limpiar" onclick="limpiarFiltros()">Limpiar filtros</button>
 </div>
 
 <div class="grid" id="catalogo">
