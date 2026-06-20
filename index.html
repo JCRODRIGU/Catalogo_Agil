@@ -36,15 +36,58 @@
 </header>
 
 <div class="filtros">
-    <select onchange="filtrarTodo()" id="f-cat"><option value="Todas">Categoría</option><option value="BIBLIAS">Biblias</option><option value="LIBROS">Libros</option></select>
-    <select onchange="filtrarTodo()" id="f-ver"><option value="Todas">Versión</option><option value="REINA VALERA 1960">RV1960</option><option value="NUEVA TRADUCCION VIVIENTE">NTV</option></select>
-    <select onchange="filtrarTodo()" id="f-pre"><option value="Todas">Present.</option><option value="DAMA">Dama</option><option value="CABALLERO">Caballero</option></select>
-    <select onchange="filtrarTodo()" id="f-let"><option value="Todas">Letra</option><option value="MEDIANA">Mediana</option><option value="GRANDE">Grande</option></select>
-    <select onchange="filtrarTodo()" id="f-tem"><option value="Todas">Tema</option><option value="GENERAL">General</option><option value="DE ESTUDIO">Estudio</option></select>
-    <select onchange="filtrarTodo()" id="f-precio"><option value="Todas">Precio</option><option value="0-50000">Hasta 50k</option><option value="50001-9999999">Más de 50k</option></select>
+    <select onchange="filtrarTodo()" id="f-cat">
+        <option value="Todas">Categoría</option>
+        <option value="BIBLIAS">Biblias</option>
+        <option value="LIBROS">Libros</option>
+    </select>
+
+    <select onchange="filtrarTodo()" id="f-ver">
+        <option value="Todas">Versión</option>
+        <option value="REINA VALERA 1960">RV1960</option>
+        <option value="NUEVA TRADUCCION VIVIENTE">NTV</option>
+        <option value="NUEVA VERSION INTERNACIONAL">NVI</option>
+        <option value="TRADUCCION EN LENGUAJE ACTUAL">TLA</option>
+        <option value="EL MENSAJE">El Mensaje</option>
+    </select>
+
+    <select onchange="filtrarTodo()" id="f-pre">
+        <option value="Todas">Present.</option>
+        <option value="DAMA">Dama</option>
+        <option value="CABALLERO">Caballero</option>
+    </select>
+
+    <select onchange="filtrarTodo()" id="f-let">
+        <option value="Todas">Letra</option>
+        <option value="PEQUEÑA">Pequeña</option>
+        <option value="MEDIANA">Mediana</option>
+        <option value="GRANDE">Grande</option>
+        <option value="GIGANTE">Gigante</option>
+        <option value="SUPERGIGANTE">Super Gig.</option>
+    </select>
+
+    <select onchange="filtrarTodo()" id="f-tem">
+        <option value="Todas">Tema</option>
+        <option value="GENERAL">General</option>
+        <option value="DE ESTUDIO">Estudio</option>
+        <option value="DE GUERRA ESPIRITUAL">Guerra Esp.</option>
+        <option value="DE MINISTRO">Ministro</option>
+    </select>
+
+    <select onchange="filtrarTodo()" id="f-precio">
+        <option value="Todas">Precio</option>
+        <option value="30000-50000">30k-50k</option>
+        <option value="50001-80000">50k-80k</option>
+        <option value="80001-110000">80k-110k</option>
+        <option value="110001-130000">110k-130k</option>
+        <option value="130001-150000">130k-150k</option>
+        <option value="150001-180000">150k-180k</option>
+        <option value="180001-220000">180k-220k</option>
+        <option value="220001-9999999">+220k</option>
+    </select>
+
     <button class="btn-limpiar" onclick="limpiarFiltros()">Limpiar filtros</button>
 </div>
-
 <div class="grid" id="catalogo">
     <div class='card' data-categoria='BIBLIAS' data-version='NUEVA TRADUCCION VIVIENTE' data-presentacion='CABALLERO' data-letra='PEQUEÑA' data-tema='GENERAL' data-precio='110000'><img src='0-imagenes/9781496427434.jpg'><p>BIBLIA NTV NEGRO SENTI PIEL - $110000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA NTV NEGRO SENTI PIEL')">Pedir</button></div>
 <div class='card' data-categoria='BIBLIAS' data-version='NUEVA TRADUCCION VIVIENTE' data-presentacion='CABALLERO' data-letra='MEDIANA' data-tema='DE ESTUDIO' data-precio='160000'><img src='0-imagenes/9781496489692.jpg'><p>BIBLIA NTV MANUAL BLANCA - $160000</p><button class='btn-comprar' onclick="window.open('https://wa.me/573125756581?text=Hola, quiero la BIBLIA NTV MANUAL BLANCA')">Pedir</button></div>
