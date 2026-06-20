@@ -168,16 +168,43 @@
 
 <script>
     function filtrarTodo() {
-        const filtros = { categoria: document.getElementById('f-cat').value, version: document.getElementById('f-ver').value, presentacion: document.getElementById('f-pre').value, letra: document.getElementById('f-let').value, tema: document.getElementById('f-tem').value, precio: document.getElementById('f-precio').value };
-        const cards = document.querySelectorAll('.card');
+        const filtros = { 
+            categoria: document.getElementById('f-cat').value, 
+            version: document.getElementById('f-ver').value, 
+            presentacion: document.getElementById('f-pre').value, 
+            letra: document.getElementById('f-let').value, 
+            tema: document.getElementById('f-tem').value, 
+            precio: document.getElementById('f-precio').value 
+        };
+        
+        const catalogo = document.getElementById('catalogo');
+        const cards = Array.from(catalogo.querySelectorAll('.card'));
+
+        // PASO 1: Filtrar (mostrar u ocultar)
         cards.forEach(card => {
             const p = parseInt(card.getAttribute('data-precio'));
             const [min, max] = filtros.precio === 'Todas' ? [0, 9999999] : filtros.precio.split('-').map(Number);
-            const match = (filtros.categoria === 'Todas' || card.getAttribute('data-categoria') === filtros.categoria) && (filtros.version === 'Todas' || card.getAttribute('data-version') === filtros.version) && (filtros.presentacion === 'Todas' || card.getAttribute('data-presentacion') === filtros.presentacion) && (filtros.letra === 'Todas' || card.getAttribute('data-letra') === filtros.letra) && (filtros.tema === 'Todas' || card.getAttribute('data-tema') === filtros.tema) && (p >= min && p <= max);
+            
+            const match = (filtros.categoria === 'Todas' || card.getAttribute('data-categoria') === filtros.categoria) && 
+                          (filtros.version === 'Todas' || card.getAttribute('data-version') === filtros.version) && 
+                          (filtros.presentacion === 'Todas' || card.getAttribute('data-presentacion') === filtros.presentacion) && 
+                          (filtros.letra === 'Todas' || card.getAttribute('data-letra') === filtros.letra) && 
+                          (filtros.tema === 'Todas' || card.getAttribute('data-tema') === filtros.tema) && 
+                          (p >= min && p <= max);
+            
             card.style.display = match ? 'flex' : 'none';
         });
+
+        // PASO 2 y 3: Ordenar y reacomodar
+        const visibles = cards.filter(card => card.style.display === 'flex');
+        visibles.sort((a, b) => parseInt(a.getAttribute('data-precio')) - parseInt(b.getAttribute('data-precio')));
+        visibles.forEach(card => catalogo.appendChild(card));
     }
-    function limpiarFiltros() { document.querySelectorAll('.filtros select').forEach(s => s.value = 'Todas'); filtrarTodo(); }
+
+    function limpiarFiltros() { 
+        document.querySelectorAll('.filtros select').forEach(s => s.value = 'Todas'); 
+        filtrarTodo(); 
+    }
 </script>
 </body>
 </html>
